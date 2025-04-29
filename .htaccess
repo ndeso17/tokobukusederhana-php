@@ -1,0 +1,12 @@
+# Cegah akses file .env dan file sensitif lain
+<FilesMatch "^\.env">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Cegah SQL Injection sederhana
+RewriteEngine On
+
+# Jika URL mengandung karakter berbahaya, blokir
+RewriteCond %{QUERY_STRING} (['"\(\)\<\>\;]) [NC]
+RewriteRule ^.*$ - [F,L]
